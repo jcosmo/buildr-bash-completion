@@ -5,6 +5,8 @@ bash completion script for buildr
 
 bash-completion: http://bash-completion.alioth.debian.org/
 buildr: http://buildr.apache.org/
+forked from: http://github.com/alikins/buildr_bash_completion
+author: http://github.com/jcosmo/buildr_bash_completion
 
 Knows the options via _parse_help, and can figure out buildr tasks.
 
