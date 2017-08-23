@@ -22,6 +22,13 @@ Or if you use a local .bash.d directory:
 
     cp buildr_bash_expansion.sh ~/.bash.d
 
+If you use bundler along with buildr and regularly type `bundle exec buildr` then you can add completion to this via
+    
+    alias buildr='bundle exec buildr'
+    or
+    alias b='bundle exec buildr'
+    complete -F _buildr b
+
 ### Changelog
 
 * Forked from alikins
