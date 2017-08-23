@@ -41,8 +41,7 @@ _buildr()
         COMPREPLY=( $( compgen -W '$( _parse_help "$1" -h )' -- "$cur" ) )
     else
         _update_buildr_cache
-        local TARGETS=$cached_buildr_targets
-        COMPREPLY=( $(compgen -W "${TARGETS}" -- ${cur}) )
+        COMPREPLY=( $(compgen -W "${cached_buildr_targets}" -- ${cur}) )
     fi
     __ltrim_colon_completions "$cur"
 }
