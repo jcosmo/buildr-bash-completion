@@ -3,10 +3,10 @@ buildr-bash-completion
 
 bash completion script for buildr
 
-bash-completion: http://bash-completion.alioth.debian.org/
-buildr: http://buildr.apache.org/
-forked from: http://github.com/alikins/buildr_bash_completion
-author: http://github.com/jcosmo/buildr_bash_completion
+    bash-completion: http://bash-completion.alioth.debian.org/.
+    buildr: http://buildr.apache.org/.
+    forked from: http://github.com/alikins/buildr_bash_completion.
+    author: http://github.com/jcosmo/buildr_bash_completion.
 
 Knows the options via _parse_help, and can figure out buildr tasks.
 
@@ -19,6 +19,7 @@ This has the undesirable sideeffect of not noticing a change in the possible bui
     (may need to source /etc/bash_completion.d/buildr)
 
 Or if you use a local .bash.d directory:
+
     cp buildr_bash_expansion.sh ~/.bash.d
 
 ### Changelog
