@@ -9,9 +9,9 @@ _update_buildr_cache()
 {
   local buildfile_path
   buildfile_path="$PWD/buildfile"
-  [[ ! -f "$buildfile_path" ]] && return 0
+  [[ ! -f $buildfile_path ]] && return 0
 
-  if [[ "$cached_buildfile_path" != "$buildfile_path" || "$cached_buildr_targets" == "" ]]; then
+  if [[ $cached_buildfile_path != $buildfile_path || $cached_buildr_targets == "" ]]; then
     cached_buildfile_path=$buildfile_path
     cached_buildr_targets=$(buildr -s -T | awk '{ print $2 }' )
   fi
