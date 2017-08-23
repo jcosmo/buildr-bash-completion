@@ -1,12 +1,28 @@
 # bash completion for buildr                       -*- shell-script -*-
+# http://github.com/jcosmo/buildr-bash-completion
+#
+# Extension to original work found at:
 # http://github.com/alikins/buildr-bash-completion
 #
+
+_update_buildr_cache()
+{
+  local buildfile_path
+  buildfile_path="$PWD/buildfile"
+  [[ ! -f "$buildfile_path" ]] && return 0
+
+  if [[ "$cached_buildfile_path" != "$buildfile_path" || "$cached_buildr_targets" == "" ]]; then
+    cached_buildfile_path=$buildfile_path
+    cached_buildr_targets=$(buildr -s -T | awk '{ print $2 }' )
+  fi
+}
+
 _buildr()
 {
-    local cur prev words cword
+    local cur prev
 
     COMPREPLY=()
-    _get_comp_words_by_ref cur prev
+    _get_comp_words_by_ref -n : cur prev
 
     case $prev in
         -buildfile|-file|-f)
@@ -24,18 +40,11 @@ _buildr()
     elif [[ "$cur" == -* ]]; then
         COMPREPLY=( $( compgen -W '$( _parse_help "$1" -h )' -- "$cur" ) )
     else
-        # nocheckstyle is a kluge, our checkstyle uses ant, which is
-        # kind of slow
-        buildfile_path=buildfile
-        [[ ! -f $buildfile_path ]] && return 0
-        local TARGETS=$(nocheckstyle=yes buildr -s -T | awk '{ print $2 }' )
-        # since we turn off checkstyle, add it back. kluge...
-        TARGETS+=' checkstyle'
+        _update_buildr_cache
+        local TARGETS=$cached_buildr_targets
         COMPREPLY=( $(compgen -W "${TARGETS}" -- ${cur}) )
-
     fi
+    __ltrim_colon_completions "$cur"
 }
 
 complete -F _buildr buildr
-
-# ex: ts=4 sw=4 et filetype=sh
